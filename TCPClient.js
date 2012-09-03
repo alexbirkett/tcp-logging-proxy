@@ -9,7 +9,6 @@ client.addListener("connect", function(){
 
 client.on('data', function(data) {
   console.log(data.toString());
-  client.end();
 });
 client.on('end', function() {
   console.log('client disconnected');
