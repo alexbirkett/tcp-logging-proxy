@@ -26,17 +26,28 @@ function buildFilePathBase(fileName) {
 	return getOutputDir() + '/' + fileName;
 }
 
+
+function closeLogStreamIfRequired(socketClosed, logStream) {
+	if (socketClosed) {
+		logStream.end();
+	}
+	socketClosed = true;
+	return socketClosed;
+}
+
 function createServer(inputPort, outputPort, ipAddress) {
 	var server = net.createServer();
 	server.on('connection', function(incomingSocket) {
 
-		filePathBase = buildFilePathBase(getFileName());
+		var filePathBase = buildFilePathBase(getFileName());
 		var logStream = fs.createWriteStream(filePathBase + '.meta');
 		logStream.write(getTimeNow() + ' IP ' + incomingSocket.remoteAddress + ' socket connected\n');
 		
 		console.log('new connection\n');
 
 		var outgoingSocket = net.createConnection(outputPort, ipAddress);
+		var socketClosed = false;
+		
 		
 		incomingSocket.on('data', function(data) {
 			var logMessage = getTimeNow() + ' upstream data: ' + data + '\n';
@@ -48,6 +59,9 @@ function createServer(inputPort, outputPort, ipAddress) {
 			var logMessage = getTimeNow() + ' incoming socket closed \n';
 			console.log(logMessage);
 			logStream.write(logMessage);
+			socketClosed = closeLogStreamIfRequired(socketClosed, logStream);
+			
+			
 		});
 		
 		outgoingSocket.on('data', function(data) {
@@ -60,6 +74,7 @@ function createServer(inputPort, outputPort, ipAddress) {
 			var logMessage = getTimeNow() + ' outgoing socket closed \n';
 			console.log(logMessage);
 			logStream.write(logMessage);
+			socketClosed = closeLogStreamIfRequired(socketClosed, logStream);
 		});
 
 		incomingSocket.pipe(outgoingSocket);
