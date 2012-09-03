@@ -5,7 +5,7 @@ var fs = require('fs');
 function getParameters() {
 	var args = process.argv.slice(2);
 	if (args < 3) {
-		throw "<input port> <output port> <output ip>";
+		throw "<input port> <output port> <host / ip address>";
 	}
 	return args;
 }
@@ -35,7 +35,7 @@ function closeLogStreamIfRequired(socketClosed, logStream) {
 	return socketClosed;
 }
 
-function createServer(inputPort, outputPort, ipAddress) {
+function createServer(inputPort, outputPort, host) {
 	var server = net.createServer();
 	server.on('connection', function(incomingSocket) {
 
@@ -45,7 +45,7 @@ function createServer(inputPort, outputPort, ipAddress) {
 		
 		console.log('new connection\n');
 
-		var outgoingSocket = net.createConnection(outputPort, ipAddress);
+		var outgoingSocket = net.createConnection(outputPort, host);
 		var socketClosed = false;
 		
 		
@@ -95,14 +95,14 @@ function createDirectory(name, callback) {
 parameters = getParameters();
 var inputPort = parameters[0];
 var outputPort = parameters[1];
-var ipAddress = parameters[2];
-console.log('input port ' + inputPort + ' output port ' + outputPort + ' ip address ' + ipAddress);
+var host = parameters[2];
+console.log('input port ' + inputPort + ' output port ' + outputPort + ' ip address ' + host);
 
 createDirectory(getOutputDir(), function(err) {
 
 	createDirectory(getOutputDir(), function(err) {
 		// todo check err
-		createServer(inputPort, outputPort, ipAddress);
+		createServer(inputPort, outputPort, host);
 	});
 });
 	
