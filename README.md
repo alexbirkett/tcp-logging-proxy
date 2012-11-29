@@ -1,6 +1,6 @@
 TCP Logging Proxy
 ===============
-Listens to upstream connections from clients on the input port and forwards them to the server on the output port. Data sent from the client to the proxy is forwarded to the server and data sent from the server to the proxy is forwarded it to the client.
+Listens to connections from clients on the input port and forwards them to the server on the output port. Data sent from the client to the proxy is forwarded to the server and data sent from the server to the proxy is forwarded it to the client.
 
 Motivation
 ========
