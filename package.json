@@ -1,0 +1,16 @@
+{
+    "name": "tcp-logging-proxy",
+    "description": "Listens to upstream connections from clients on the input port and forwards them to the server on the output port",
+    "author": "Alex Birkett <alex@birkett.no>",
+    "version": "0.0.1",
+    "main": "./tcp-logging-proxy.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/alexbirkett/tcp-logging-proxy.git"
+    },
+    "engines": {
+        "node": ">= 0.8.0"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}
