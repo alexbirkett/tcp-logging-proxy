@@ -6,9 +6,18 @@ Motivation
 ========
 This project was created to help debug the TCP based protocols commonly used by GPS tracking devices for the [Location IO project](https://github.com/alexbirkett/location.io)
 
+Install
+=======
+
+To install the most recent release from npm, run:
+
+     npm install -g tcp-logging-proxy
+    
 Usage
 =====
-`node tcp-logging-proxy.js <input port> <output port> <host / ip address>`
+    
+    tcp-logging-proxy.js [input port] [output port] [host / ip address]
+    
 
 Output
 ======
