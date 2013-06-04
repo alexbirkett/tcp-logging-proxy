@@ -12,5 +12,9 @@
         "node": ">= 0.8.0"
     },
     "dependencies": {},
-    "devDependencies": {}
+    "devDependencies": {},
+    "bin" : { "tcp-logging-proxy" : "tcp-logging-proxy.js" },
+    "preferGlobal": true,
+    "homepage": "http://location.io",
+    "license" : "MIT"
 }
