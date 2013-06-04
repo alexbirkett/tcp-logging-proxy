@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+// -*- js -*-
+
 console.log('starting server');
 var net = require('net');
 var fs = require('fs');
